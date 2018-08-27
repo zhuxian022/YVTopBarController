@@ -12,7 +12,7 @@
 ## Change ViewController Event
 #### implemente method 
 ```Object-C
-    - (void)didScrollToIndex:(NSInteger)index    
+- (void)didScrollToIndex:(NSInteger)index    
 ```
 
 ## Custom Your TopBarItem
