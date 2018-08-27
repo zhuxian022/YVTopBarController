@@ -6,7 +6,10 @@
 >>#### set viewControllers
 
 ## Change ViewController Event
->>#### implemente method "- (void)didScrollToIndex:(NSInteger)index"
+>>#### implemente method 
+```Object-C
+>>>>- (void)didScrollToIndex:(NSInteger)index    
+```
 
 ## Custom Your TopBarItem
 >>#### implemente NavTabBarTitleViewDataSource
