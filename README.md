@@ -2,7 +2,8 @@
 
 
 ## How To Use
-#### Create a subClass of YVTopBarController
+#### create a subClass of UIViewController
+#### import "UIViewController+YVTopBarController.h"
 #### set viewControllers
 
 ### Attentions:
@@ -16,4 +17,4 @@
 ```
 
 ## Custom Your TopBarItem
-#### implemente NavTabBarTitleViewDataSource
+#### implemente YVTopBarDataSource
