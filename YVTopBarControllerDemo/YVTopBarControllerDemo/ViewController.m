@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     self.title = @"YVTopBarControllerDemo";
     
     _titles = @[@"默认TopBar",@"自定义TopBar"];
