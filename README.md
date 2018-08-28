@@ -1,6 +1,6 @@
 # YVTopBarController
 
-![](http://github.com/zhuxian022/YVTopBarController/blob/master/view.gif)
+![quickLook](https://github.com/zhuxian022/YVTopBarController/blob/master/view.gif?raw=true)
 
 ## How To Use
 #### create a subClass of UIViewController
