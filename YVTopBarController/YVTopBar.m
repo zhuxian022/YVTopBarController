@@ -71,7 +71,7 @@
     if ([_dataSource respondsToSelector:@selector(reUsableItemClassNameForTopBar:)]) {
         NSString *itemName = [_dataSource reUsableItemClassNameForTopBar:self];
         
-        if ([[NSBundle mainBundle] pathForResource:itemName ofType:@"xib"] != nil) {
+        if ([[NSBundle mainBundle] pathForResource:itemName ofType:@"xib"] != nil || [[NSBundle mainBundle] pathForResource:itemName ofType:@"nib"] != nil) {
             [_ItemsView registerNib:[UINib nibWithNibName:itemName bundle:nil] forCellWithReuseIdentifier:itemName];
         }
         else{
@@ -122,28 +122,10 @@
 }
 
 - (void)changeBottomLineFrame:(CGRect)itemFrame{
-//    CGFloat sepeWidth = YVDefaultSepeWidth;
-//    if ([_dataSource respondsToSelector:@selector(sepeWidthForTopBar:)]) {
-//        sepeWidth = [_dataSource sepeWidthForTopBar:self];
-//    }
-//
-//    CGFloat width = [self collectionView:_ItemsView layout:_layout sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0]].width;
-    
-//    if (CGRectGetWidth(_bottomLine.frame)) {
-//        YVWeakSelf;
-//        [UIView animateWithDuration:0.3 animations:^{
-//            weakSelf.bottomLine.frame = CGRectMake(sepeWidth*(weakSelf.selectedIndex+1)+width*(weakSelf.selectedIndex), CGRectGetMaxY(weakSelf.ItemsView.frame)-YVSlideLineHeight, width, YVSlideLineHeight);
-//        }];
-//    }
-//    else{
-//        _bottomLine.frame = CGRectMake(sepeWidth*(_selectedIndex+1)+width*(_selectedIndex), CGRectGetMaxY(_ItemsView.frame)-YVSlideLineHeight, width, YVSlideLineHeight);
-//    }
-    
     YVWeakSelf;
-//    YVTopBarItem *item = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
     NSLog(@"change%@",NSStringFromCGRect(_bottomLine.frame));
     [UIView animateWithDuration:0.3 animations:^{
-        weakSelf.bottomLine.frame = CGRectMake(CGRectGetMinX(itemFrame), YVTopBarItemHeight-YVSlideLineHeight, CGRectGetWidth(itemFrame), YVSlideLineHeight);
+        weakSelf.bottomLine.frame = CGRectMake(CGRectGetMinX(itemFrame), CGRectGetMaxY(weakSelf.ItemsView.frame)-YVSlideLineHeight, CGRectGetWidth(itemFrame), YVSlideLineHeight);
     }];
 }
 

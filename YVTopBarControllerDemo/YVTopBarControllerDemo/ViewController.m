@@ -7,10 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "YVDefaultTopBarController.h"
+#import "YVCustomTopBarController.h"
 
-#import "UIViewController+YVTopBarController.h"
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@interface ViewController ()<UITableViewDelegate>
+@property (nonatomic ,strong) NSArray *titles;
 
 @end
 
@@ -19,24 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSMutableArray *viewControllers = [NSMutableArray array];
-    NSMutableArray *array = [NSMutableArray arrayWithObjects:[UIColor redColor],[UIColor greenColor],[UIColor yellowColor], nil];
-    for (NSInteger i=0; i<array.count; i++) {
-        UIViewController *viewController = [UIViewController new];
-        viewController.title = [NSString stringWithFormat:@"页面%ld",(long)i];
-        viewController.view.backgroundColor = array[i];
-        [viewControllers addObject:viewController];
-    }
-    self.viewControllers = viewControllers;
-}
-
-- (void)didScrollToIndex:(NSInteger)index{
-    NSLog(@"scrollToIndex:%ld",(long)index);
-}
-
-#pragma mark
-- (CGSize)topBar:(YVTopBar *)topBar SizeForIndex:(NSInteger)index{
-    return CGSizeMake(YViPhoneWidth/2, YVTopBarItemHeight);
+    self.title = @"YVTopBarControllerDemo";
+    
+    _titles = @[@"默认TopBar",@"自定义TopBar"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,5 +31,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -UITableView-
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _titles.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"TableViewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    
+    cell.textLabel.text = _titles[indexPath.row];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (!indexPath.row) {
+        YVDefaultTopBarController *defaultTBC = [[YVDefaultTopBarController alloc]init];
+        defaultTBC.title = _titles[indexPath.row];
+        [self.navigationController pushViewController:defaultTBC animated:YES];
+    }
+    else{
+        YVCustomTopBarController *customTBC = [[YVCustomTopBarController alloc]init];
+        customTBC.title = _titles[indexPath.row];
+        [self.navigationController pushViewController:customTBC animated:YES];
+    }
+}
 
 @end

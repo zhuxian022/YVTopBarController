@@ -19,6 +19,9 @@
 		9A6D22502134205400AA1DD1 /* YVTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6D224F2134205400AA1DD1 /* YVTopBar.m */; };
 		9A6D2254213464F100AA1DD1 /* CustomTopBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6D2252213464F100AA1DD1 /* CustomTopBarItem.m */; };
 		9A6D2255213464F100AA1DD1 /* CustomTopBarItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A6D2253213464F100AA1DD1 /* CustomTopBarItem.xib */; };
+		E21F06B6213529DE00F03919 /* YVDefaultTopBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E21F06B5213529DE00F03919 /* YVDefaultTopBarController.m */; };
+		E21F06B921352A9C00F03919 /* YVCustomTopBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E21F06B821352A9C00F03919 /* YVCustomTopBarController.m */; };
+		E21F06BB21352D6500F03919 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = E21F06BA21352D6500F03919 /* image.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,11 @@
 		9A6D2251213464F100AA1DD1 /* CustomTopBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTopBarItem.h; sourceTree = "<group>"; };
 		9A6D2252213464F100AA1DD1 /* CustomTopBarItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTopBarItem.m; sourceTree = "<group>"; };
 		9A6D2253213464F100AA1DD1 /* CustomTopBarItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTopBarItem.xib; sourceTree = "<group>"; };
+		E21F06B4213529DE00F03919 /* YVDefaultTopBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YVDefaultTopBarController.h; sourceTree = "<group>"; };
+		E21F06B5213529DE00F03919 /* YVDefaultTopBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YVDefaultTopBarController.m; sourceTree = "<group>"; };
+		E21F06B721352A9C00F03919 /* YVCustomTopBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YVCustomTopBarController.h; sourceTree = "<group>"; };
+		E21F06B821352A9C00F03919 /* YVCustomTopBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YVCustomTopBarController.m; sourceTree = "<group>"; };
+		E21F06BA21352D6500F03919 /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,11 @@
 				9A6D221021341E8D00AA1DD1 /* AppDelegate.m */,
 				9A6D221221341E8D00AA1DD1 /* ViewController.h */,
 				9A6D221321341E8D00AA1DD1 /* ViewController.m */,
+				E21F06B4213529DE00F03919 /* YVDefaultTopBarController.h */,
+				E21F06B5213529DE00F03919 /* YVDefaultTopBarController.m */,
+				E21F06B721352A9C00F03919 /* YVCustomTopBarController.h */,
+				E21F06B821352A9C00F03919 /* YVCustomTopBarController.m */,
+				E21F06BA21352D6500F03919 /* image.jpeg */,
 				9A6D2251213464F100AA1DD1 /* CustomTopBarItem.h */,
 				9A6D2252213464F100AA1DD1 /* CustomTopBarItem.m */,
 				9A6D2253213464F100AA1DD1 /* CustomTopBarItem.xib */,
@@ -263,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A6D221C21341E8E00AA1DD1 /* LaunchScreen.storyboard in Resources */,
+				E21F06BB21352D6500F03919 /* image.jpeg in Resources */,
 				9A6D221921341E8E00AA1DD1 /* Assets.xcassets in Resources */,
 				9A6D221721341E8D00AA1DD1 /* Main.storyboard in Resources */,
 				9A6D2255213464F100AA1DD1 /* CustomTopBarItem.xib in Resources */,
@@ -292,6 +306,8 @@
 			files = (
 				9A6D221421341E8D00AA1DD1 /* ViewController.m in Sources */,
 				9A6D2254213464F100AA1DD1 /* CustomTopBarItem.m in Sources */,
+				E21F06B6213529DE00F03919 /* YVDefaultTopBarController.m in Sources */,
+				E21F06B921352A9C00F03919 /* YVCustomTopBarController.m in Sources */,
 				9A6D221F21341E8E00AA1DD1 /* main.m in Sources */,
 				9A6D221121341E8D00AA1DD1 /* AppDelegate.m in Sources */,
 				9A6D22502134205400AA1DD1 /* YVTopBar.m in Sources */,
