@@ -6,6 +6,19 @@
 #### create a subClass of UIViewController
 #### import "UIViewController+YVTopBarController.h"
 #### set viewControllers
+```Object-C
+- (void)addControllers{
+    NSMutableArray *viewControllers = [NSMutableArray array];
+    NSMutableArray *array = [NSMutableArray arrayWithObjects:[UIColor redColor],[UIColor greenColor],[UIColor yellowColor], nil];
+    for (NSInteger i=0; i<array.count; i++) {
+        UIViewController *viewController = [UIViewController new];
+        viewController.title = [NSString stringWithFormat:@"页面%ld",(long)i];
+        viewController.view.backgroundColor = array[i];
+        [viewControllers addObject:viewController];
+    }
+    self.viewControllers = viewControllers;
+}
+```
 
 ### Attentions:
 #### 1.topBarItem's text equals to childViewController's title.if childViewController's title is `nil`,defaultTopBarItem's text is `nil`
