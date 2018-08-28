@@ -2,6 +2,14 @@
 
 ![quickLook](https://github.com/zhuxian022/YVTopBarController/blob/master/view.gif?raw=true)
 
+## Installation
+#### 1.cocoapod 
+```Object-C
+pod 'YVTopBarController', '~> 0.0.1'
+```
+
+#### 2.add Files to your project
+
 ## How To Use
 #### create a subClass of UIViewController
 #### import "UIViewController+YVTopBarController.h"
