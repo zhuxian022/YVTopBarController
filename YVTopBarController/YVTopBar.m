@@ -231,6 +231,10 @@
 
 //点击cell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    YVTopBarItem *oldItem = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0]];
+    oldItem.selected = NO;
+    [collectionView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:YES];
+    
     _selectedIndex = indexPath.item;
     
     [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];

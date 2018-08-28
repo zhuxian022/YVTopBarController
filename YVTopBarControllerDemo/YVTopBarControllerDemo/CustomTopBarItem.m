@@ -15,4 +15,15 @@
     // Initialization code
 }
 
+- (void)setSelected:(BOOL)selected{
+    [super setSelected:self];
+    
+    if (selected) {
+        _titleLabel.textColor = [UIColor redColor];
+    }
+    else{
+        _titleLabel.textColor = [UIColor blackColor];
+    }
+}
+
 @end

@@ -10,4 +10,7 @@
 
 @interface CustomTopBarItem : YVTopBarItem
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 @end
