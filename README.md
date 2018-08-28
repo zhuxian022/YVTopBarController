@@ -32,3 +32,23 @@
 
 ## Custom Your TopBarItem
 #### implemente YVTopBarDataSource
+```Object-C
+//topBar高度
+- (CGFloat)heightForTopBar:(YVTopBar *)topBar;
+
+//每个item的size
+- (CGSize)topBar:(YVTopBar *)topBar SizeForIndex:(NSInteger)index;
+
+//间隔
+- (CGFloat)sepeWidthForTopBar:(YVTopBar *)topBar;
+
+/*
+***自定义item必须实现下面两个方法
+*/
+
+//自定义item的类名，方便collectionView注册
+- (NSString *)reUsableItemClassNameForTopBar:(YVTopBar *)topBar;
+
+//对reUsableItem填充数据、设置样式...
+- (YVTopBarItem *)topBar:(YVTopBar *)topBar ReUsableItem:(YVTopBarItem *)reUsableItem TitleItemForIndex:(NSInteger)index;    
+```
