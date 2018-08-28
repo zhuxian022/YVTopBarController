@@ -125,7 +125,7 @@ static const char YVTopBarView = '\0';
         
         [self.view addSubview:topBarView];
         
-        objc_setAssociatedObject(self, &topBarView, topBarView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &YVTopBarView, topBarView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
     return topBarView;

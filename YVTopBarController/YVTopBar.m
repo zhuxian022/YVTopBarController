@@ -37,9 +37,6 @@
     if (!_selectedIndex) {
         _selectedIndex = 0;
     }
-    else{
-        [self changeBottomLineFrame];
-    }
     
     [_ItemsView reloadData];
     
@@ -56,11 +53,14 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
     _selectedIndex = selectedIndex;
     
+    NSLog(@"set%@",NSStringFromCGRect(_bottomLine.frame));
+    
     if (_selectedIndex < _titles.count) {
         [_ItemsView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
         [_ItemsView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         
-        [self changeBottomLineFrame];
+        YVTopBarItem *item = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:selectedIndex inSection:0]];
+        [self changeBottomLineFrame:item.frame];
     }
 }
 
@@ -68,9 +68,8 @@
     _dataSource = dataSource;
     
     //注册cell
-    if ([_dataSource respondsToSelector:@selector(topBar:ReUsableItem:TitleItemForIndex:)]) {
-        id item = [_dataSource topBar:self ReUsableItem:nil TitleItemForIndex:0];
-        NSString *itemName = NSStringFromClass([item class]);
+    if ([_dataSource respondsToSelector:@selector(reUsableItemClassNameForTopBar:)]) {
+        NSString *itemName = [_dataSource reUsableItemClassNameForTopBar:self];
         
         if ([[NSBundle mainBundle] pathForResource:itemName ofType:@"xib"] != nil) {
             [_ItemsView registerNib:[UINib nibWithNibName:itemName bundle:nil] forCellWithReuseIdentifier:itemName];
@@ -79,9 +78,6 @@
             [_ItemsView registerClass:NSClassFromString(itemName) forCellWithReuseIdentifier:itemName];
         }
     }
-    
-    //改变底部横线位置
-    [self changeBottomLineFrame];
 }
 
 - (void)reload{
@@ -123,27 +119,32 @@
     _bottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_ItemsView.frame)-YVSlideLineHeight, 0, YVSlideLineHeight)];
     _bottomLine.backgroundColor = [UIColor blackColor];
     [_ItemsView addSubview:_bottomLine];
-    
-    [self changeBottomLineFrame];
 }
 
-- (void)changeBottomLineFrame{
-    CGFloat sepeWidth = YVDefaultSepeWidth;
-    if ([_dataSource respondsToSelector:@selector(sepeWidthForTopBar:)]) {
-        sepeWidth = [_dataSource sepeWidthForTopBar:self];
-    }
+- (void)changeBottomLineFrame:(CGRect)itemFrame{
+//    CGFloat sepeWidth = YVDefaultSepeWidth;
+//    if ([_dataSource respondsToSelector:@selector(sepeWidthForTopBar:)]) {
+//        sepeWidth = [_dataSource sepeWidthForTopBar:self];
+//    }
+//
+//    CGFloat width = [self collectionView:_ItemsView layout:_layout sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0]].width;
     
-    CGFloat width = [self collectionView:_ItemsView layout:_layout sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0]].width;
+//    if (CGRectGetWidth(_bottomLine.frame)) {
+//        YVWeakSelf;
+//        [UIView animateWithDuration:0.3 animations:^{
+//            weakSelf.bottomLine.frame = CGRectMake(sepeWidth*(weakSelf.selectedIndex+1)+width*(weakSelf.selectedIndex), CGRectGetMaxY(weakSelf.ItemsView.frame)-YVSlideLineHeight, width, YVSlideLineHeight);
+//        }];
+//    }
+//    else{
+//        _bottomLine.frame = CGRectMake(sepeWidth*(_selectedIndex+1)+width*(_selectedIndex), CGRectGetMaxY(_ItemsView.frame)-YVSlideLineHeight, width, YVSlideLineHeight);
+//    }
     
-    if (CGRectGetWidth(_bottomLine.frame)) {
-        YVWeakSelf;
-        [UIView animateWithDuration:0.3 animations:^{
-            weakSelf.bottomLine.frame = CGRectMake(sepeWidth*(weakSelf.selectedIndex+1)+width*(weakSelf.selectedIndex), CGRectGetMaxY(weakSelf.ItemsView.frame)-YVSlideLineHeight, width, YVSlideLineHeight);
-        }];
-    }
-    else{
-        _bottomLine.frame = CGRectMake(sepeWidth*(_selectedIndex+1)+width*(_selectedIndex), CGRectGetMaxY(_ItemsView.frame)-YVSlideLineHeight, width, YVSlideLineHeight);
-    }
+    YVWeakSelf;
+//    YVTopBarItem *item = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
+    NSLog(@"change%@",NSStringFromCGRect(_bottomLine.frame));
+    [UIView animateWithDuration:0.3 animations:^{
+        weakSelf.bottomLine.frame = CGRectMake(CGRectGetMinX(itemFrame), YVTopBarItemHeight-YVSlideLineHeight, CGRectGetWidth(itemFrame), YVSlideLineHeight);
+    }];
 }
 
 #pragma mark collectionView代理方法
@@ -208,16 +209,18 @@
 {
     if ([_dataSource respondsToSelector:@selector(topBar:ReUsableItem:TitleItemForIndex:)]) {
         
-        id customItem = [_dataSource topBar:self ReUsableItem:nil TitleItemForIndex:0];
-        NSString *className = NSStringFromClass([customItem class]);
+        YVTopBarItem *item = nil;
         
-        YVTopBarItem *item = [_ItemsView dequeueReusableCellWithReuseIdentifier:className forIndexPath:indexPath];
+        if ([_dataSource respondsToSelector:@selector(reUsableItemClassNameForTopBar:)]) {
+            NSString *className = [_dataSource reUsableItemClassNameForTopBar:self];
+            item = [_ItemsView dequeueReusableCellWithReuseIdentifier:className forIndexPath:indexPath];
+        }
         
         //选中
         if (indexPath.item == _selectedIndex) {
             item.selected = YES;
             [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-            [self changeBottomLineFrame];
+            [self changeBottomLineFrame:item.frame];
         }
         else{
             item.selected = NO;
@@ -234,7 +237,7 @@
         if (indexPath.item == _selectedIndex) {
             item.selected = YES;
             [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-            [self changeBottomLineFrame];
+            [self changeBottomLineFrame:item.frame];
         }
         else{
             item.selected = NO;
@@ -254,7 +257,8 @@
         [_delegate topBar:self didClickIndex:indexPath.item];
     }
     
-    [self changeBottomLineFrame];
+    YVTopBarItem *item = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:indexPath];
+    [self changeBottomLineFrame:item.frame];
 }
 
 @end

@@ -33,6 +33,11 @@
 - (CGFloat)heightForTopBar:(YVTopBar *)topBar;
 
 #pragma mark -Custom Item-
+/*
+    ***自定义item必须实现下面两个方法
+ */
+- (NSString *)reUsableItemClassNameForTopBar:(YVTopBar *)topBar;
+
 - (YVTopBarItem *)topBar:(YVTopBar *)topBar ReUsableItem:(YVTopBarItem *)reUsableItem TitleItemForIndex:(NSInteger)index;
 
 @end
