@@ -60,8 +60,6 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
     _selectedIndex = selectedIndex;
     
-    NSLog(@"set%@",NSStringFromCGRect(_bottomLine.frame));
-    
     if (_selectedIndex < _titles.count) {
         [_ItemsView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
         [_ItemsView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
@@ -130,7 +128,6 @@
 
 - (void)changeBottomLineFrame:(CGRect)itemFrame{
     YVWeakSelf;
-    NSLog(@"change%@",NSStringFromCGRect(_bottomLine.frame));
     [UIView animateWithDuration:0.3 animations:^{
         weakSelf.bottomLine.frame = CGRectMake(CGRectGetMinX(itemFrame), CGRectGetMaxY(weakSelf.ItemsView.frame)-YVSlideLineHeight, CGRectGetWidth(itemFrame), YVSlideLineHeight);
     }];
