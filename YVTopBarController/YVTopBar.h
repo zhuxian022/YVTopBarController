@@ -10,7 +10,7 @@
 
 #define YVTopBarItemHeight 35
 #define YVDefaultSepeWidth 0
-#define YVSlideLineHeight 1
+#define YVSlideLineHeight 2
 
 #define YVIsDeviceIPhoneX  CGSizeEqualToSize([UIScreen mainScreen].currentMode.size, CGSizeMake(1125, 2436))
 
@@ -77,6 +77,11 @@
  顶部菜单标题
  */
 @property (nonatomic ,strong) NSArray *titles;
+
+/*
+ 默认颜色
+ */
+@property (nonatomic ,strong) UIColor *defaultColor;
 
 //重新加载
 - (void)reload;

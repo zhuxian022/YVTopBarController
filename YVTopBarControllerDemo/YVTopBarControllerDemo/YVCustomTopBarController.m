@@ -37,6 +37,8 @@
         [viewControllers addObject:viewController];
     }
     self.viewControllers = viewControllers;
+    
+    self.topBar.tintColor = [UIColor redColor];
 }
 
 - (void)didScrollToIndex:(NSInteger)index{
@@ -58,6 +60,7 @@
 
 - (YVTopBarItem *)topBar:(YVTopBar *)topBar ReUsableItem:(YVTopBarItem *)reUsableItem TitleItemForIndex:(NSInteger)index{
     CustomTopBarItem *customItem = (CustomTopBarItem *)reUsableItem;
+    customItem.titleLabel.text = [NSString stringWithFormat:@"页面%ld",(long)index];
     return customItem;
 }
 @end

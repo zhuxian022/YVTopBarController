@@ -50,6 +50,13 @@
     }
 }
 
+- (void)setTintColor:(UIColor *)tintColor{
+    [super setTintColor:tintColor];
+    
+    [_ItemsView reloadData];
+    _bottomLine.backgroundColor = tintColor;
+}
+
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
     _selectedIndex = selectedIndex;
     
@@ -117,7 +124,7 @@
 //滚动条
 - (void)addBottomLine{
     _bottomLine = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_ItemsView.frame)-YVSlideLineHeight, 0, YVSlideLineHeight)];
-    _bottomLine.backgroundColor = [UIColor blackColor];
+    _bottomLine.backgroundColor = self.tintColor;
     [_ItemsView addSubview:_bottomLine];
 }
 
@@ -212,6 +219,7 @@
     }
     else{
         YVTopBarItem *item = [collectionView dequeueReusableCellWithReuseIdentifier:@"YVTopBarItem" forIndexPath:indexPath];
+        item.tintColor = self.tintColor;
         
         [item loadWithTitle:_titles[indexPath.item]];
         
@@ -285,7 +293,7 @@
 - (void)setSelected:(BOOL)selected{
     if (selected) {
         self.titleLabel.font = [UIFont systemFontOfSize:13];
-        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.textColor = self.tintColor;
     }
     else{
         self.titleLabel.font = [UIFont systemFontOfSize:12];
