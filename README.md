@@ -10,6 +10,10 @@ pod 'YVTopBarController', '~> 0.0.1'
 
 #### 2.add Files to your project
 
+## Update 
+#### * 2018.08.29 First version   v0.0.1
+#### * 2018.08.30 Custom titleColor、titleFont、tintFont  v1.1
+
 ## How To Use
 #### create a subClass of UIViewController
 #### import "UIViewController+YVTopBarController.h"
