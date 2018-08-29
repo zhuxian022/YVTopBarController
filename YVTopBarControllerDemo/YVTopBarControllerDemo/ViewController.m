@@ -24,7 +24,7 @@
 //    self.navigationController.navigationBar.translucent = NO;
     self.title = @"YVTopBarControllerDemo";
     
-    _titles = @[@"默认TopBar",@"自定义TopBar"];
+    _titles = @[@"默认TopBar",@"自定义样式（color、font）",@"自定义TopBar"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +53,13 @@
     if (!indexPath.row) {
         YVDefaultTopBarController *defaultTBC = [[YVDefaultTopBarController alloc]init];
         defaultTBC.title = _titles[indexPath.row];
+        defaultTBC.customStyle = NO;
+        [self.navigationController pushViewController:defaultTBC animated:YES];
+    }
+    else if (indexPath.row == 1){
+        YVDefaultTopBarController *defaultTBC = [[YVDefaultTopBarController alloc]init];
+        defaultTBC.title = _titles[indexPath.row];
+        defaultTBC.customStyle = YES;
         [self.navigationController pushViewController:defaultTBC animated:YES];
     }
     else{

@@ -10,4 +10,6 @@
 
 @interface YVDefaultTopBarController : UIViewController
 
+@property (nonatomic ,assign)BOOL customStyle;
+
 @end

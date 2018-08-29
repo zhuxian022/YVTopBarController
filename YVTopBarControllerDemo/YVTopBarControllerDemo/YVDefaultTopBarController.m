@@ -36,6 +36,14 @@
         [viewControllers addObject:viewController];
     }
     self.viewControllers = viewControllers;
+    
+    //自定义样式
+    if (_customStyle) {
+        self.topBar.titleColor = [UIColor grayColor];
+        self.topBar.tintColor = [UIColor redColor];
+        self.topBar.titleFont = [UIFont systemFontOfSize:15];
+        self.topBar.tintFont = [UIFont systemFontOfSize:17];
+    }
 }
 
 - (void)didScrollToIndex:(NSInteger)index{

@@ -85,9 +85,21 @@
 @property (nonatomic ,strong) NSArray *titles;
 
 /*
- 默认颜色
+ 标题颜色
+ 
+ 选中颜色设置tintColor
  */
-@property (nonatomic ,strong) UIColor *defaultColor;
+@property (nonatomic ,strong) UIColor *titleColor;
+
+/*
+ 标题字体
+ */
+@property (nonatomic ,strong) UIFont *titleFont;
+
+/*
+ 选中标题字体
+ */
+@property (nonatomic ,strong) UIFont *tintFont;
 
 //重新加载
 - (void)reload;
@@ -97,7 +109,9 @@
 #pragma mark -TopBarItem-
 @interface YVTopBarItem : UICollectionViewCell
 
-+ (CGSize)sizeWithTitle:(NSString *)title MaxCount:(NSInteger)maxCount SepeWidth:(CGFloat)sepeWidth;
++ (CGSize)sizeWithTitle:(NSString *)title MaxCount:(NSInteger)maxCount SepeWidth:(CGFloat)sepeWidth Font:(UIFont *)font;
+
+- (void)styleWithTitleColor:(UIColor *)titleColor TitleFont:(UIFont *)titleFont TintFont:(UIFont *)tintFont;
 
 - (void)loadWithTitle:(NSString *)title;
 

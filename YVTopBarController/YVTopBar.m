@@ -23,10 +23,40 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        //默认样式
+        _titleColor = [UIColor lightGrayColor];
+        _titleFont = [UIFont systemFontOfSize:12];
+        _tintFont = [UIFont systemFontOfSize:13];
+        
         [self addTitleCollectionView];
         [self addBottomLine];
     }
     return self;
+}
+
+- (void)setTitleColor:(UIColor *)titleColor{
+    _titleColor = titleColor;
+    
+    if (_ItemsView) {
+        [_ItemsView reloadData];
+    }
+}
+
+- (void)setTitleFont:(UIFont *)titleFont{
+    _titleFont = titleFont;
+    
+    if (_ItemsView) {
+        [_ItemsView reloadData];
+    }
+}
+
+- (void)setTintFont:(UIFont *)tintFont{
+    _tintFont = tintFont;
+    
+    if (_ItemsView) {
+        [_ItemsView reloadData];
+    }
 }
 
 - (void)setTitles:(NSArray *)titles{
@@ -182,10 +212,10 @@
         }
         
         if (indexPath.item<_titles.count) {
-            return [YVTopBarItem sizeWithTitle:_titles[indexPath.item] MaxCount:_numberOfItem SepeWidth:sepeWidth];
+            return [YVTopBarItem sizeWithTitle:_titles[indexPath.item] MaxCount:_numberOfItem SepeWidth:sepeWidth Font:_tintFont?_tintFont:[UIFont systemFontOfSize:13]];
         }
         else{
-            return [YVTopBarItem sizeWithTitle:@"" MaxCount:_numberOfItem SepeWidth:sepeWidth];
+            return [YVTopBarItem sizeWithTitle:@"" MaxCount:_numberOfItem SepeWidth:sepeWidth Font:_tintFont?_tintFont:[UIFont systemFontOfSize:13]];
         }
     }
 }
@@ -217,6 +247,7 @@
     else{
         YVTopBarItem *item = [collectionView dequeueReusableCellWithReuseIdentifier:@"YVTopBarItem" forIndexPath:indexPath];
         item.tintColor = self.tintColor;
+        [item styleWithTitleColor:_titleColor TitleFont:_tintFont TintFont:_tintFont];
         
         [item loadWithTitle:_titles[indexPath.item]];
         
@@ -259,18 +290,35 @@
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 
+/*
+ 标题颜色
+ 
+ 选中颜色设置tintColor
+ */
+@property (nonatomic ,strong) UIColor *titleColor;
+
+/*
+ 标题字体
+ */
+@property (nonatomic ,strong) UIFont *titleFont;
+
+/*
+ 选中标题字体
+ */
+@property (nonatomic ,strong) UIFont *tintFont;
+
 @end
 
 @implementation YVTopBarItem
 
-+ (CGSize)sizeWithTitle:(NSString *)title MaxCount:(NSInteger)maxCount SepeWidth:(CGFloat)sepeWidth{
++ (CGSize)sizeWithTitle:(NSString *)title MaxCount:(NSInteger)maxCount SepeWidth:(CGFloat)sepeWidth Font:(UIFont *)font{
     if (maxCount) {
         return CGSizeMake((YViPhoneWidth-1-sepeWidth*(maxCount+1))/maxCount, YVTopBarItemHeight);
     }
     else{
         NSMutableDictionary *attr = [NSMutableDictionary new];
         
-        attr[NSFontAttributeName] = [UIFont systemFontOfSize:13];
+        attr[NSFontAttributeName] = font;
         
         NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -283,18 +331,24 @@
     }
 }
 
+- (void)styleWithTitleColor:(UIColor *)titleColor TitleFont:(UIFont *)titleFont TintFont:(UIFont *)tintFont{
+    _titleColor = titleColor;
+    _titleFont = titleFont;
+    _tintFont = tintFont;
+}
+
 - (void)loadWithTitle:(NSString *)title{
     self.titleLabel.text = title;
 }
 
 - (void)setSelected:(BOOL)selected{
     if (selected) {
-        self.titleLabel.font = [UIFont systemFontOfSize:13];
+        self.titleLabel.font = _titleFont;
         self.titleLabel.textColor = self.tintColor;
     }
     else{
-        self.titleLabel.font = [UIFont systemFontOfSize:12];
-        self.titleLabel.textColor = [UIColor lightGrayColor];
+        self.titleLabel.font = _tintFont;
+        self.titleLabel.textColor = _titleColor;
     }
 }
 
@@ -302,8 +356,8 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc]initWithFrame:self.bounds];
-        _titleLabel.font = [UIFont systemFontOfSize:12];
-        _titleLabel.textColor = [UIColor lightGrayColor];
+        _titleLabel.font = _titleFont;
+        _titleLabel.textColor = _titleColor;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_titleLabel];
     }
