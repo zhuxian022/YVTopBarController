@@ -11,9 +11,9 @@ pod 'YVTopBarController', '~> 1.0'
 #### 2.add Files to your project
 
 ## Update 
-* #### 2018.08.29 First version   v0.0.1
-* #### 2018.08.30 Custom titleColor、titleFont、tintFont  v1.0
-* #### 2018.08.30 decoupling macro definition
+* #### 2018.08.28 First version   v0.0.1
+* #### 2018.08.29 Custom titleColor、titleFont、tintFont  v1.0
+* #### 2018.08.29 decoupling macro definition
 
 ## How To Use
 #### create a subClass of UIViewController
