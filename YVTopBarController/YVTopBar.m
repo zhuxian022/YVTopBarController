@@ -313,7 +313,7 @@
 
 + (CGSize)sizeWithTitle:(NSString *)title MaxCount:(NSInteger)maxCount SepeWidth:(CGFloat)sepeWidth Font:(UIFont *)font{
     if (maxCount) {
-        return CGSizeMake((YViPhoneWidth-1-sepeWidth*(maxCount+1))/maxCount, YVTopBarItemHeight);
+        return CGSizeMake((YVTopBariPhoneWidth-1-sepeWidth*(maxCount+1))/maxCount, YVTopBarItemHeight);
     }
     else{
         NSMutableDictionary *attr = [NSMutableDictionary new];
@@ -324,7 +324,7 @@
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         attr[NSParagraphStyleAttributeName] = paragraphStyle;
         
-        CGSize size = [title boundingRectWithSize:CGSizeMake(YViPhoneWidth, YVTopBarItemHeight)
+        CGSize size = [title boundingRectWithSize:CGSizeMake(YVTopBariPhoneWidth, YVTopBarItemHeight)
                                          options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                       attributes:attr context:nil].size;
         return CGSizeMake(size.width, YVTopBarItemHeight);

@@ -104,7 +104,7 @@ static const char YVTopBarView = '\0';
     if (!topBarView) {
         CGFloat height = [self heightForTopBar:nil];
         
-        topBarView = [[YVTopBar alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.translucent?YVNavigationHeight:0, YViPhoneWidth, height)];
+        topBarView = [[YVTopBar alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.translucent?YVTopBarNavigationHeight:0, YVTopBariPhoneWidth, height)];
         topBarView.delegate = self;
         topBarView.dataSource = self;
         topBarView.selectedIndex = self.selectedIndex;

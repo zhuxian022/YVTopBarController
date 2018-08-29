@@ -12,12 +12,12 @@
 #define YVDefaultSepeWidth 0
 #define YVSlideLineHeight 2
 
-#define YVIsDeviceIPhoneX  CGSizeEqualToSize([UIScreen mainScreen].currentMode.size, CGSizeMake(1125, 2436))
+#define YVTopBarDeviceIPhoneX  CGSizeEqualToSize([UIScreen mainScreen].currentMode.size, CGSizeMake(1125, 2436))
 
 //设备宽高
-#define YViPhoneWidth ([UIScreen mainScreen].bounds.size.width)
+#define YVTopBariPhoneWidth ([UIScreen mainScreen].bounds.size.width)
 //导航栏、tabbar
-#define YVNavigationHeight (YVIsDeviceIPhoneX?88:64)
+#define YVTopBarNavigationHeight (YVTopBarDeviceIPhoneX?88:64)
 
 @class YVTopBar;
 @class YVTopBarItem;
