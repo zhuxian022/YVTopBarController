@@ -44,7 +44,7 @@ pod 'YVTopBarController', '~> 1.1'
 ```
 
 ## Custom Your TopBarItem
-#### implemente YVTopBarDataSource
+#### implement YVTopBarDataSource
 ```Object-C
 //topBar高度
 - (CGFloat)heightForTopBar:(YVTopBar *)topBar;
