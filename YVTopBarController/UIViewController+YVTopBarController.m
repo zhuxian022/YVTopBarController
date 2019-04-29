@@ -53,7 +53,7 @@ static const char YVViewControllers = '\0';
 static const char YVSelectedIndex = '\0';
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
     objc_setAssociatedObject(self, &YVSelectedIndex,
-                             [NSString stringWithFormat:@"%ld",(long)selectedIndex], OBJC_ASSOCIATION_ASSIGN);
+                             [NSString stringWithFormat:@"%ld",(long)selectedIndex], OBJC_ASSOCIATION_COPY_NONATOMIC);
     
     if (selectedIndex<self.viewControllers.count){
         if (self.contentView) {
