@@ -42,7 +42,8 @@
         self.topBar.titleColor = [UIColor grayColor];
         self.topBar.tintColor = [UIColor redColor];
         self.topBar.titleFont = [UIFont systemFontOfSize:15];
-        self.topBar.tintFont = [UIFont systemFontOfSize:17];
+        self.topBar.tintFont = [UIFont systemFontOfSize:19];
+        self.topBar.backgroundColor = [UIColor greenColor];
     }
 }
 

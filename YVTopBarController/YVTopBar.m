@@ -99,6 +99,12 @@
     }
 }
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor{
+    [super setBackgroundColor:backgroundColor];
+    
+    [_ItemsView reloadData];
+}
+
 - (void)setDataSource:(id<YVTopBarDataSource>)dataSource{
     _dataSource = dataSource;
     
@@ -246,8 +252,9 @@
     }
     else{
         YVTopBarItem *item = [collectionView dequeueReusableCellWithReuseIdentifier:@"YVTopBarItem" forIndexPath:indexPath];
+        item.backgroundColor = self.backgroundColor;
         item.tintColor = self.tintColor;
-        [item styleWithTitleColor:_titleColor TitleFont:_tintFont TintFont:_tintFont];
+        [item styleWithTitleColor:_titleColor TitleFont:_titleFont TintFont:_tintFont];
         
         [item loadWithTitle:_titles[indexPath.item]];
         
@@ -343,11 +350,11 @@
 
 - (void)setSelected:(BOOL)selected{
     if (selected) {
-        self.titleLabel.font = _titleFont;
+        self.titleLabel.font = _tintFont;
         self.titleLabel.textColor = self.tintColor;
     }
     else{
-        self.titleLabel.font = _tintFont;
+        self.titleLabel.font = _titleFont;
         self.titleLabel.textColor = _titleColor;
     }
 }
