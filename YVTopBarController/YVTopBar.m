@@ -101,7 +101,7 @@
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor{
     [super setBackgroundColor:backgroundColor];
-    
+    _ItemsView.backgroundColor = backgroundColor;
     [_ItemsView reloadData];
 }
 
