@@ -5,7 +5,7 @@
 ## Installation
 #### 1.cocoapod 
 ```Object-C
-pod 'YVTopBarController', '~> 1.1.2'
+pod 'YVTopBarController', '~> 1.1.3'
 ```
 
 #### 2.add Files to your project

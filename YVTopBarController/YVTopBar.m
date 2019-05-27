@@ -274,20 +274,22 @@
 
 //点击cell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    YVTopBarItem *oldItem = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0]];
-    oldItem.selected = NO;
-    [collectionView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:YES];
-    
-    _selectedIndex = indexPath.item;
-    
-    [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-    
-    if ([_delegate respondsToSelector:@selector(topBar:didClickIndex:)]) {
-        [_delegate topBar:self didClickIndex:indexPath.item];
+    if (indexPath.row != _selectedIndex) {
+        YVTopBarItem *oldItem = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0]];
+        oldItem.selected = NO;
+        [collectionView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:YES];
+        
+        _selectedIndex = indexPath.item;
+        
+        [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+        
+        if ([_delegate respondsToSelector:@selector(topBar:didClickIndex:)]) {
+            [_delegate topBar:self didClickIndex:indexPath.item];
+        }
+        
+        YVTopBarItem *item = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:indexPath];
+        [self changeBottomLineFrame:item.frame];
     }
-    
-    YVTopBarItem *item = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:indexPath];
-    [self changeBottomLineFrame:item.frame];
 }
 
 @end
