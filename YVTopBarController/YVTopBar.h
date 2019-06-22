@@ -70,6 +70,11 @@
 @property (nonatomic ,strong) UIView *bottomLine;
 
 /*
+ 滚动横条
+ */
+@property (nonatomic ,strong) UIView *sepeLine;
+
+/*
  当前显示第几个,默认为0
  */
 @property (nonatomic ,assign) NSInteger selectedIndex;

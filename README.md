@@ -5,7 +5,7 @@
 ## Installation
 #### 1.cocoapod 
 ```Object-C
-pod 'YVTopBarController', '~> 1.1.3'
+pod 'YVTopBarController', '~> 1.1.4'
 ```
 
 #### 2.add Files to your project
@@ -15,6 +15,7 @@ pod 'YVTopBarController', '~> 1.1.3'
 * #### 2018.08.29 Custom titleColor、titleFont、tintFont  v1.0
 * #### 2018.08.29 decoupling macro definition
 * #### 2019.05.27 fix bugs
+* #### 2019.06.22 fix bugs
 
 ## How To Use
 #### create a subClass of UIViewController

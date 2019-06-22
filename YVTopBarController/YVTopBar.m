@@ -150,9 +150,9 @@
     [_ItemsView registerClass:[YVTopBarItem class] forCellWithReuseIdentifier:@"YVTopBarItem"];
     
     //底部分割线
-    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(_ItemsView.frame), CGRectGetMaxY(_ItemsView.frame), CGRectGetWidth(_ItemsView.frame), 0.5)];
-    line.backgroundColor = [UIColor lightGrayColor];
-    [self addSubview:line];
+    _sepeLine = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(_ItemsView.frame), CGRectGetMaxY(_ItemsView.frame), CGRectGetWidth(_ItemsView.frame), 0.5)];
+    _sepeLine.backgroundColor = [UIColor lightGrayColor];
+    [self addSubview:_sepeLine];
 }
 
 //滚动条
@@ -185,6 +185,16 @@
 //最小列间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     
+    if ([self.dataSource respondsToSelector:@selector(sepeWidthForTopBar:)]) {
+        return [self.dataSource sepeWidthForTopBar:self];
+    }
+    else{
+        return YVDefaultSepeWidth;
+    }
+}
+
+//最小行间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
     if ([self.dataSource respondsToSelector:@selector(sepeWidthForTopBar:)]) {
         return [self.dataSource sepeWidthForTopBar:self];
     }
