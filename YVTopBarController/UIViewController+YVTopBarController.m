@@ -52,17 +52,18 @@ static const char YVViewControllers = '\0';
 #pragma mark - selectedIndex-
 static const char YVSelectedIndex = '\0';
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
-    objc_setAssociatedObject(self, &YVSelectedIndex,
-                             [NSString stringWithFormat:@"%ld",(long)selectedIndex], OBJC_ASSOCIATION_COPY_NONATOMIC);
-    
+    NSInteger oldIndex = self.selectedIndex;
     if (selectedIndex<self.viewControllers.count){
         if (self.contentView) {
-            [self.contentView setViewControllers:@[self.viewControllers[selectedIndex]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+            [self.contentView setViewControllers:@[self.viewControllers[selectedIndex]] direction:oldIndex<selectedIndex?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
         }
         if (self.topBar) {
             self.topBar.selectedIndex = selectedIndex;
         }
     }
+    
+    objc_setAssociatedObject(self, &YVSelectedIndex,
+                             [NSString stringWithFormat:@"%ld",(long)selectedIndex], OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (NSInteger)selectedIndex{
