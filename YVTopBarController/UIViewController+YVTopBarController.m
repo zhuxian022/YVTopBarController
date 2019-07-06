@@ -195,7 +195,7 @@ static const char YVTopBarView = '\0';
     }
     
     //    NSLog(@"selectedIndex=%ld",(long)_selectedIndex);
-    self.topBar.selectedIndex = self.selectedIndex;
+    [self.topBar setSelectedIndex:self.selectedIndex animated:YES];;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {

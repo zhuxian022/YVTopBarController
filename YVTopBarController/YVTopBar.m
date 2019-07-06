@@ -88,14 +88,22 @@
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
+    [self setSelectedIndex:selectedIndex animated:NO];
+}
+
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated{
+    YVTopBarItem *oldItem = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0]];
+    oldItem.selected = NO;
+    [_ItemsView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:YES];
+    
     _selectedIndex = selectedIndex;
     
     if (_selectedIndex < _titles.count) {
-        [_ItemsView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-        [_ItemsView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        [_ItemsView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+        [_ItemsView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_selectedIndex inSection:0] animated:animated scrollPosition:UICollectionViewScrollPositionNone];
         
         YVTopBarItem *item = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:selectedIndex inSection:0]];
-        [self changeBottomLineFrame:item.frame];
+        [self changeBottomLineFrame:item.frame WithAnimated:animated];
     }
 }
 
@@ -162,11 +170,16 @@
     [_ItemsView addSubview:_bottomLine];
 }
 
-- (void)changeBottomLineFrame:(CGRect)itemFrame{
+- (void)changeBottomLineFrame:(CGRect)itemFrame WithAnimated:(BOOL)animated{
     YVWeakSelf;
-    [UIView animateWithDuration:0.3 animations:^{
-        weakSelf.bottomLine.frame = CGRectMake(CGRectGetMinX(itemFrame), CGRectGetMaxY(weakSelf.ItemsView.frame)-YVSlideLineHeight, CGRectGetWidth(itemFrame), YVSlideLineHeight);
-    }];
+    if (animated) {
+        [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.bottomLine.frame = CGRectMake(CGRectGetMinX(itemFrame), CGRectGetMaxY(weakSelf.ItemsView.frame)-YVSlideLineHeight, CGRectGetWidth(itemFrame), YVSlideLineHeight);
+        }];
+    }
+    else{
+        self.bottomLine.frame = CGRectMake(CGRectGetMinX(itemFrame), CGRectGetMaxY(weakSelf.ItemsView.frame)-YVSlideLineHeight, CGRectGetWidth(itemFrame), YVSlideLineHeight);
+    }
 }
 
 #pragma mark collectionView代理方法
@@ -252,7 +265,7 @@
         if (indexPath.item == _selectedIndex) {
             item.selected = YES;
             [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-            [self changeBottomLineFrame:item.frame];
+            [self changeBottomLineFrame:item.frame WithAnimated:YES];
         }
         else{
             item.selected = NO;
@@ -272,7 +285,7 @@
         if (indexPath.item == _selectedIndex) {
             item.selected = YES;
             [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-            [self changeBottomLineFrame:item.frame];
+            [self changeBottomLineFrame:item.frame WithAnimated:YES];
         }
         else{
             item.selected = NO;
@@ -298,7 +311,7 @@
         }
         
         YVTopBarItem *item = (YVTopBarItem *)[_ItemsView cellForItemAtIndexPath:indexPath];
-        [self changeBottomLineFrame:item.frame];
+        [self changeBottomLineFrame:item.frame WithAnimated:YES];
     }
 }
 

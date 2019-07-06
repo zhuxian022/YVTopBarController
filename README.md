@@ -5,7 +5,7 @@
 ## Installation
 #### 1.cocoapod 
 ```Object-C
-pod 'YVTopBarController', '~> 1.1.5'
+pod 'YVTopBarController', '~> 1.1.6'
 ```
 
 #### 2.add Files to your project
@@ -17,6 +17,7 @@ pod 'YVTopBarController', '~> 1.1.5'
 * #### 2019.05.27 fix bugs
 * #### 2019.06.22 fix bugs v1.1.4
 * #### 2019.06.22 fix bugs v1.1.5
+* #### 2019.07.06 fix bugs v1.1.6
 
 ## How To Use
 #### create a subClass of UIViewController

@@ -79,6 +79,8 @@
  */
 @property (nonatomic ,assign) NSInteger selectedIndex;
 
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated;
+
 /*
  顶部菜单显示几个，为0则根据每个子控制器的标题宽度自适应，不为0则平均宽度
  */
