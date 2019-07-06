@@ -264,8 +264,8 @@
         //选中
         if (indexPath.item == _selectedIndex) {
             item.selected = YES;
-            [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-            [self changeBottomLineFrame:item.frame WithAnimated:YES];
+            [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+            [self changeBottomLineFrame:item.frame WithAnimated:NO];
         }
         else{
             item.selected = NO;
@@ -284,8 +284,8 @@
         //选中
         if (indexPath.item == _selectedIndex) {
             item.selected = YES;
-            [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-            [self changeBottomLineFrame:item.frame WithAnimated:YES];
+            [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+            [self changeBottomLineFrame:item.frame WithAnimated:NO];
         }
         else{
             item.selected = NO;
